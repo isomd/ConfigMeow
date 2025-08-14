@@ -1,0 +1,35 @@
+### 1. 设置配置接口测试
+POST http://localhost:8080/config/api/set
+Content-Type: application/json
+
+{
+  "appName": "test-app",
+  "environment": "dev",
+  "configKey": "database.url",
+  "configValue": "jdbc:mysql://localhost:3306/test_db",
+  "description": "测试数据库连接URL",
+  "dataType": "string",
+  "isActive": true
+}
+
+HTTP/1.1 200  - OK
+content-type: application/json
+transfer-encoding: chunked
+date: Thu, 14 Aug 2025 14:02:58 GMT
+connection: close
+###
+GET http://localhost:8080/config/api/get?appName=test-app&environment=dev&configKey=database.url
+
+HTTP/1.1 200  - OK
+content-type: application/json
+transfer-encoding: chunked
+date: Thu, 14 Aug 2025 14:03:01 GMT
+connection: close
+###
+GET http://localhost:8080/config/api/delete?appName=test-app&environment=dev&configKey=database.url
+
+HTTP/1.1 200  - OK
+content-type: application/json
+transfer-encoding: chunked
+date: Thu, 14 Aug 2025 13:57:03 GMT
+connection: close
