@@ -1,4 +1,4 @@
-package io.github.timemachinelab.dto;
+package io.github.timemachinelab.pojo.dto;
 
 import lombok.Data;
 import javax.validation.constraints.NotBlank;
@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class ConfigRequest {
     @NotNull(message = "ID不能为空")
-    private Long id;
+    private String id;
 
     @NotBlank(message = "应用名称不能为空")
     private String appName;

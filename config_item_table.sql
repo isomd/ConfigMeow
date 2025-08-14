@@ -1,0 +1,20 @@
+CREATE TABLE config_item (
+    id VARCHAR(64) NOT NULL COMMENT '配置ID',
+    app_name VARCHAR(100) NOT NULL COMMENT '应用名称',
+    environment VARCHAR(20) NOT NULL COMMENT '环境(dev/test/prod)',
+    config_key VARCHAR(200) NOT NULL COMMENT '配置键',
+    config_value TEXT COMMENT '配置值',
+    description VARCHAR(500) COMMENT '配置描述',
+    data_type VARCHAR(20) DEFAULT 'string' COMMENT '数据类型(string/int/boolean/json)',
+    is_active TINYINT(1) DEFAULT 1 COMMENT '是否激活',
+    created_by VARCHAR(50) COMMENT '创建人',
+    updated_by VARCHAR(50) COMMENT '更新人',
+    created_time DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    updated_time DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+    version INT DEFAULT 1 COMMENT '版本号，用于乐观锁',
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_app_env_key (app_name, environment, config_key),
+    KEY idx_app_env (app_name, environment),
+    KEY idx_app_name (app_name),
+    KEY idx_is_active (is_active)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='配置管理表';
